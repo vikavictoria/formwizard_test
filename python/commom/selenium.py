@@ -15,7 +15,7 @@ PARAMS = {
 
 USER_AGENTS = {
     'chrome': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36'
-    ' (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
+    ' (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
     'safari': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+'
     ' (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2',
     'ie7': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727;'
