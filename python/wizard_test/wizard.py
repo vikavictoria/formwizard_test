@@ -5,6 +5,11 @@ import time
 
 from python.commom.selenium import Selenium, true
 
+USERS = {
+    'successfully': {'username': os.getenv('FA_username'), 'password':os.getenv('FA_password')},
+    'failed': {'username': 'Netfon', 'password': 'ADMIN123'},
+}
+
 
 class Formularwisard_login(unittest.TestCase):
 
@@ -20,33 +25,23 @@ class Formularwisard_login(unittest.TestCase):
         self.driver.get("http://144.76.0.171:89/app/dashboard")
         assert "Form Wizard" in self.driver.title
 
+    def login(self, username, password):
+
+        self.driver.get('http://144.76.0.171:89/login')
+        self.driver.find_element_by_css_selector('input[type="text"]').send_keys(username)
+        self.driver.find_element_by_css_selector('input[type="password"]').send_keys(password)
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+
+
+
     def test_login_successfully(self):
 
-        self.driver.get("http://144.76.0.171:89/login")
-
-        s_username = self.driver.find_element_by_css_selector('input[type="text"]')
-        s_username.send_keys("Netfonds")
-        s_password = self.driver.find_element_by_css_selector('input[type="password"]')
-        s_password.send_keys("OKX70Z4N")
-        s_continue = self.driver.find_element_by_css_selector('button[type="submit"]')
-        s_continue.click()
-
-        time.sleep(3)
-
-
+        self.login(**USERS['successfully'])
+        time.sleep(1)
         assert "Interactive PDF Files" in self.driver.page_source
 
     def test_failed_wrong_credentials(self):
-
-        self.driver.get("http://144.76.0.171:89/login")
-
-        f_username = self.driver.find_element_by_css_selector('input[type="text"]')
-        f_username.send_keys("Netfon")
-        f_password = self.driver.find_element_by_css_selector('input[type="password"]')
-        f_password.send_keys("ADMIN123")
-        f_continue = self.driver.find_element_by_css_selector('button[type="submit"]')
-        f_continue.click()
-
+        self.login(**USERS['failed'])
         time.sleep(1)
         assert "Bad credentials" in self.driver.page_source
 
